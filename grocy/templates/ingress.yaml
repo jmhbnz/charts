@@ -14,7 +14,7 @@ metadata:
       more_set_headers "Referrer-Policy: strict-origin-when-cross-origin";
       more_set_headers "Permissions-Policy: geolocation=(none);midi=(self);notifications=(self);push=(self);sync-xhr=();microphone=(none);camera=(none);magnetometer=(none);gyroscope=(none);speaker=(self);vibrate=(self);fullscreen=(self);payment=(none);";
       more_clear_headers "X-Powered-By";
-  spec:
+spec:
   tls:
     - hosts:
         - grocy.jamma.life
