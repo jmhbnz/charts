@@ -1,0 +1,10 @@
+#+TITLE: Helm charts
+#+AUTHOR: James Blair
+#+EMAIL: mail@jamesblair.net
+#+DATE: <2022-05-01 Sun 10:15>
+
+This repository contains all the helm charts I store and maintain for my personal infrastructure.
+
+A github actions workflow is in place ~on: push~ to ensure charts are linted.
+
+In future I will extend this repository to also validate the deployment of charts against a short lived minikube cluster and publish charts.
