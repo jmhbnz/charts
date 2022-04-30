@@ -1,0 +1,29 @@
+---
+kind: Ingress
+apiVersion: networking.k8s.io/v1
+metadata:
+  name: grocy
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+    nginx.ingress.kubernetes.io/configuration-snippet: |
+      more_set_headers "X-XSS-Protection: 1";
+      more_set_headers "X-Content-Type-Options: nosniff";
+      more_set_headers "X-Frame-Options: SAMEORIGIN";
+      more_set_headers "Content-Security-Policy: frame-src 'self'; default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://nextcloud.jamma.life https://maxcdn.bootstrapcdn.com https://ajax.googleapis.com; img-src 'self' data: https://secure.gravatar.com; style-src 'self' 'unsafe-inline' https://maxcdn.bootstrapcdn.com https://fonts.googleapis.com; font-src 'self' data: https://maxcdn.bootstrapcdn.com https://fonts.gstatic.com; form-action 'self'; upgrade-insecure-requests";
+      more_set_headers "Referrer-Policy: strict-origin-when-cross-origin";
+      more_set_headers "Permissions-Policy: geolocation=(none);midi=(self);notifications=(self);push=(self);sync-xhr=();microphone=(none);camera=(none);magnetometer=(none);gyroscope=(none);speaker=(self);vibrate=(self);fullscreen=(self);payment=(none);";
+      more_clear_headers "X-Powered-By";
+  spec:
+  tls:
+    - hosts:
+        - grocy.jamma.life
+      secretName: tls-jamma-grocy
+  rules:
+  - host: grocy.jamma.life
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: grocy
+          servicePort: 80
