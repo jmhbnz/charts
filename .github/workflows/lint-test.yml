@@ -1,6 +1,6 @@
 name: Lint test helm charts
 
-on: commit
+on: push
 
 jobs:
   lint-test:
