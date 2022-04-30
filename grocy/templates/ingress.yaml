@@ -24,6 +24,9 @@ spec:
     http:
       paths:
       - path: /
+        pathType: prefix
         backend:
-          serviceName: grocy
-          servicePort: 80
+          service:
+            name: grocy
+            port:
+              number: 80
