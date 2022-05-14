@@ -107,11 +107,11 @@ tolerations: []
 
 affinity: {}
 
-extraVolumes: []
-  #- name: renderD129
-  #  hostPath:
-  #    path: /dev/dri/renderD129
+extraVolumes:
+  - name: jammaraid
+    hostPath:
+      path: /media/raid/jammaraid
 
-extraVolumeMounts: []
-  #- mountPath: /dev/dri/renderD129
-  #  name: renderD129
+extraVolumeMounts:
+  - mountPath: /media/raid/jammaraid
+    name: jammaraid
