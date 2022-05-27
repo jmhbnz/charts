@@ -9,6 +9,9 @@ I created this helm chart for self-hosting jellyfin in a container on ~k3s~. Com
 
 #+NAME: Deploy jellyfin via helm
 #+begin_src tmate
+# Ensure jellyfin namespace exists
+sudo kubectl create namespace jamma-jellyfin
+
 # Clone charts repository
 git clone https://github.com/jmhbnz/charts.git
 
