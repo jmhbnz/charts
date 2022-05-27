@@ -13,5 +13,5 @@ I created this helm chart for self-hosting jellyfin in a container on ~k3s~. Com
 git clone https://github.com/jmhbnz/charts.git
 
 # Install the chart
-helm upgrade --install -n jamma-jellyfin jellyfin charts/jellyfin
+helm upgrade --install -n jamma-jellyfin jamma-jellyfin charts/jellyfin
 #+end_src
