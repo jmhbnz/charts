@@ -60,7 +60,7 @@ persistence:
     #   existingClaim:
     #   readOnly: true
 
-resources: {}
+resources:
   limits:
    cpu: 10
    memory: 8Gi
