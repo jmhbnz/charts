@@ -34,7 +34,7 @@ ingress:
   path: /
   hosts:
     - jellyfin.jamma.dev
-  tls: []
+  tls:
    - secretName: tls-jamma-jellyfin
      hosts:
        - jellyfin.jamma.dev
