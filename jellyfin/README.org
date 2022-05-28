@@ -12,9 +12,15 @@ I created this helm chart for self-hosting jellyfin in a container on ~k3s~. Com
 # Ensure jellyfin namespace exists
 sudo kubectl create namespace jamma-jellyfin
 
+# Create directories if they don't already exist
+mkdir --parent Services/jellyfin
+
 # Clone charts repository
-git clone https://github.com/jmhbnz/charts.git
+cd Services/jellyfin && git clone https://github.com/jmhbnz/charts.git
 
 # Install the chart
-helm upgrade --install -n jamma-jellyfin jamma-jellyfin charts/jellyfin
+helm upgrade --install -n jamma-jellyfin jamma-jellyfin charts/jellyfin \
+    --set "ingress.hosts[0]=jellyfin.jamma.dev" 
+    --set "ingress.tls[0].hosts[0]=jellyfin.jamma.dev" \
+    --set "ingress.tls[0].secretName=tls-jamma-jellyfin"
 #+end_src
