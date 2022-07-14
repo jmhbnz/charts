@@ -12,9 +12,6 @@ fullnameOverride: ""
 service:
   type: ClusterIP
   port: 8096
-  annotations: {}
-  labels: {}
-  loadBalancerIP:
 
 ingress:
   enabled: true
