@@ -1,0 +1,59 @@
+ {
+  "LibraryOptions": {
+    "EnablePhotos": true,
+    "EnableRealtimeMonitor": true,
+    "EnableChapterImageExtraction": false,
+    "ExtractChapterImagesDuringLibraryScan": false,
+    "PathInfos": [
+      {
+        "Path": "/media/raid/jammaraid/Movies"
+      }
+    ],
+    "SaveLocalMetadata": false,
+    "EnableAutomaticSeriesGrouping": false,
+    "EnableEmbeddedTitles": false,
+    "EnableEmbeddedEpisodeInfos": false,
+    "AutomaticRefreshIntervalDays": 0,
+    "PreferredMetadataLanguage": "en",
+    "MetadataCountryCode": "NZ",
+    "SeasonZeroDisplayName": "Specials",
+    "MetadataSavers": [],
+    "DisabledLocalMetadataReaders": [],
+    "LocalMetadataReaderOrder": [],
+    "DisabledSubtitleFetchers": [],
+    "SubtitleFetcherOrder": [],
+    "SkipSubtitlesIfEmbeddedSubtitlesPresent": true,
+    "SkipSubtitlesIfAudioTrackMatches": false,
+    "SubtitleDownloadLanguages": [],
+    "RequirePerfectSubtitleMatch": true,
+    "SaveSubtitlesWithMedia": true,
+    "AutomaticallyAddToCollection": false,
+    "AllowEmbeddedSubtitles": "AllowAll",
+    "TypeOptions": [
+      {
+        "Type": "string",
+        "MetadataFetchers": [
+            "TheMovieDb",
+            "The Open Movie Database"
+        ],
+        "MetadataFetcherOrder": [
+            "TheMovie",
+            "The Open Movie Database"
+          ],
+        "ImageFetchers": [
+            "TheMovieDb",
+            "The Open Movie Database",
+            "Embedded Image Extractor",
+            "Screen Grabber"
+        ],
+        "ImageFetcherOrder": [
+            "TheMovieDb",
+            "The Open Movie Database",
+            "Embedded Image Extractor",
+            "Screen Grabber"
+        ],
+        "ImageOptions": []
+      }
+    ]
+  }
+}
