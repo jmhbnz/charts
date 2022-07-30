@@ -26,9 +26,9 @@
   "EnabledChannels": [],
   "EnableAllChannels": false,
   "EnabledFolders": [
-    "Movies",
-    "Music",
-    "Shows"
+    "${movies_id}",
+    "${music_id}",
+    "${shows_id}"
   ],
   "EnableAllFolders": false,
   "InvalidLoginAttemptCount": 0,
@@ -40,5 +40,6 @@
   "RemoteClientBitrateLimit": 0,
   "AuthenticationProviderId": "Jellyfin.Server.Implementations.Users.DefaultAuthenticationProvider",
   "PasswordResetProviderId": "Jellyfin.Server.Implementations.Users.DefaultPasswordResetProvider",
-  "SyncPlayAccess": "None"
+  "SyncPlayAccess": "None",
+  "newPolicy": true
 }
