@@ -40,6 +40,5 @@
   "RemoteClientBitrateLimit": 0,
   "AuthenticationProviderId": "Jellyfin.Server.Implementations.Users.DefaultAuthenticationProvider",
   "PasswordResetProviderId": "Jellyfin.Server.Implementations.Users.DefaultPasswordResetProvider",
-  "SyncPlayAccess": "None",
-  "newPolicy": true
+  "SyncPlayAccess": "None"
 }
