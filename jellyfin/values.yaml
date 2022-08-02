@@ -21,13 +21,13 @@ ingress:
     nginx.ingress.kubernetes.io/proxy-body-size: 10G
     cert-manager.io/cluster-issuer: "letsencrypt-prod"
     nginx.ingress.kubernetes.io/configuration-snippet: |
-      more_clear_headers "X-Powered-By"
+      more_clear_headers "X-Powered-By";
       more_set_headers "X-XSS-Protection: 1";
       more_set_headers "X-Frame-Options: SAMEORIGIN";
       more_set_headers "X-Content-Type-Options: nosniff";
       more_set_headers "Referrer-Policy: strict-origin-when-cross-origin";
       more_set_headers "Permissions-Policy: geolocation=(none);midi=(self);notifications=(self);push=(self);sync-xhr=();microphone=(none);camera=(none);magnetometer=(none);gyroscope=(none);speaker=(self);vibrate=(self);fullscreen=(self);payment=(none);";
-      more_set_headers "Content-Security-Policy: base-uri 'none'; connect-src 'self'; default-src 'none'; font-src 'self'; form-action 'self'; frame-ancestors 'none'; frame-src 'self'; img-src 'self'; media-src 'self' data:; object-src 'none'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'";
+      more_set_headers "Content-Security-Policy: base-uri 'none'; manifest-src 'self'; connect-src 'self' wss: ws: https://mb3admin.com; font-src 'self' data: ; form-action 'self'; frame-ancestors 'self'; worker-src 'self' blob:; frame-src 'self'; img-src data: https: http:; media-src 'self' blob: data:; object-src 'none'; script-src 'self' https://www.gstatic.com; style-src 'self' 'unsafe-inline'";
   path: /
   hosts:
     - jellyfin.jamma.dev
