@@ -19,5 +19,8 @@ mkdir --parent "/home/${USER}/Services/gitea"
 cd "/home/${USER}/Services/gitea" && git clone https://github.com/jmhbnz/charts.git
 
 # Install the chart
-helm upgrade --install -n jamma-gitea jamma-gitea charts/gitea
+helm upgrade --install -n jamma-gitea jamma-gitea charts/gitea \
+    --set "ingress.hosts[0]=gitea.jamma.dev" \
+    --set "ingress.tls[0].hosts[0]=gitea.jamma.dev" \
+    --set "ingress.tls[0].secretName=tls-jamma-gitea"
 #+end_src
