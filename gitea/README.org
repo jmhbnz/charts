@@ -19,5 +19,5 @@ mkdir --parent "/home/${USER}/Services/gitea"
 cd "/home/${USER}/Services/gitea" && git clone https://github.com/jmhbnz/charts.git
 
 # Install the chart
-helm upgrade --install -n jamma-gitea jamma-gitea charts/jellyfin
+helm upgrade --install -n jamma-gitea jamma-gitea charts/gitea
 #+end_src
