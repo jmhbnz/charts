@@ -144,9 +144,11 @@ ingress:
       more_set_headers "X-Frame-Options: SAMEORIGIN";
       more_set_headers "X-Content-Type-Options: nosniff";
       more_set_headers "Referrer-Policy: strict-origin-when-cross-origin";
-  path: /
   hosts:
-    - gitea.jamma.dev
+    - host: gitea.jamma.dev
+      paths:
+        - path: /
+          pathType: Prefix
   tls:
    - secretName: tls-jamma-gitea
      hosts:
