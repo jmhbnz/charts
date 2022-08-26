@@ -150,9 +150,9 @@ ingress:
         - path: /
           pathType: Prefix
   tls:
-   - secretName: tls-jamma-gitea
-     hosts:
-       - gitea.jamma.dev
+    - secretName: tls-jamma-gitea
+      hosts:
+        - gitea.jamma.dev
 
 ## @section StatefulSet
 #
@@ -316,7 +316,11 @@ gitea:
     #   customEmailUrl:
 
   ## @param gitea.config  Configuration for the Gitea server,ref: [config-cheat-sheet](https://docs.gitea.io/en-us/config-cheat-sheet/)
-  config: {}
+  config:
+    cache:
+      ENABLED: false
+    database:
+      DB_TYPE: sqlite3
   #  APP_NAME: "Gitea: Git with a cup of tea"
   #  RUN_MODE: dev
   #
@@ -404,7 +408,7 @@ gitea:
 ## @param memcached.enabled Memcached is loaded as a dependency from [Bitnami](https://github.com/bitnami/charts/tree/master/bitnami/memcached) if enabled in the values. Complete Configuration can be taken from their website.
 ## @param memcached.service.port Port for Memcached
 memcached:
-  enabled: true
+  enabled: false
   service:
     port: 11211
 
@@ -417,7 +421,7 @@ memcached:
 ## @param postgresql.global.postgresql.servicePort PostgreSQL port (overrides service.port)
 ## @param postgresql.persistence.size PVC Storage Request for PostgreSQL volume
 postgresql:
-  enabled: true
+  enabled: false
   global:
     postgresql:
       postgresqlDatabase: gitea
