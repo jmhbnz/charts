@@ -404,7 +404,7 @@ gitea:
 ## @param memcached.enabled Memcached is loaded as a dependency from [Bitnami](https://github.com/bitnami/charts/tree/master/bitnami/memcached) if enabled in the values. Complete Configuration can be taken from their website.
 ## @param memcached.service.port Port for Memcached
 memcached:
-  enabled: false
+  enabled: true
   service:
     port: 11211
 
@@ -417,7 +417,7 @@ memcached:
 ## @param postgresql.global.postgresql.servicePort PostgreSQL port (overrides service.port)
 ## @param postgresql.persistence.size PVC Storage Request for PostgreSQL volume
 postgresql:
-  enabled: false
+  enabled: true
   global:
     postgresql:
       postgresqlDatabase: gitea

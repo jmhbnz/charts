@@ -18,6 +18,8 @@ mkdir --parent "/home/${USER}/Services/gitea"
 # Clone charts repository
 cd "/home/${USER}/Services/gitea" && git clone https://github.com/jmhbnz/charts.git
 
+helm dependency build charts/gitea
+
 # Install the chart
 helm upgrade --install -n jamma-gitea jamma-gitea charts/gitea \
     --set "ingress.hosts[0]=gitea.jamma.dev" \
