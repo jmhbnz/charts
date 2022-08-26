@@ -95,14 +95,6 @@ app.kubernetes.io/instance: {{ .Release.Name }}
 {{- printf "%s-postgresql.%s.svc.%s:%g" .Release.Name .Release.Namespace .Values.clusterDomain .Values.postgresql.global.postgresql.servicePort -}}
 {{- end -}}
 
-{{- define "mysql.dns" -}}
-{{- printf "%s-mysql.%s.svc.%s:%g" .Release.Name .Release.Namespace .Values.clusterDomain .Values.mysql.service.port | trunc 63 | trimSuffix "-" -}}
-{{- end -}}
-
-{{- define "mariadb.dns" -}}
-{{- printf "%s-mariadb.%s.svc.%s:%g" .Release.Name .Release.Namespace .Values.clusterDomain .Values.mariadb.primary.service.port | trunc 63 | trimSuffix "-" -}}
-{{- end -}}
-
 {{- define "memcached.dns" -}}
 {{- printf "%s-memcached.%s.svc.%s:%g" .Release.Name .Release.Namespace .Values.clusterDomain .Values.memcached.service.port | trunc 63 | trimSuffix "-" -}}
 {{- end -}}
@@ -295,23 +287,6 @@ https
     {{- $_ := set .Values.gitea.config.database "NAME"      .Values.postgresql.global.postgresql.postgresqlDatabase -}}
     {{- $_ := set .Values.gitea.config.database "USER"      .Values.postgresql.global.postgresql.postgresqlUsername -}}
     {{- $_ := set .Values.gitea.config.database "PASSWD"    .Values.postgresql.global.postgresql.postgresqlPassword -}}
-  {{- else if .Values.mysql.enabled -}}
-    {{- $_ := set .Values.gitea.config.database "DB_TYPE"   "mysql" -}}
-    {{- if not (.Values.gitea.config.database.HOST) -}}
-      {{- $_ := set .Values.gitea.config.database "HOST"      (include "mysql.dns" .) -}}
-    {{- end -}}
-    {{- $_ := set .Values.gitea.config.database "NAME"      .Values.mysql.db.name -}}
-    {{- $_ := set .Values.gitea.config.database "USER"      .Values.mysql.db.user -}}
-    {{- $_ := set .Values.gitea.config.database "PASSWD"    .Values.mysql.db.password -}}
-  {{- else if .Values.mariadb.enabled -}}
-    {{- $_ := set .Values.gitea.config.database "DB_TYPE"   "mysql" -}}
-    {{- if not (.Values.gitea.config.database.HOST) -}}
-      {{- $_ := set .Values.gitea.config.database "HOST"      (include "mariadb.dns" .) -}}
-    {{- end -}}
-    {{- $_ := set .Values.gitea.config.database "NAME"      .Values.mariadb.auth.database -}}
-    {{- $_ := set .Values.gitea.config.database "USER"      .Values.mariadb.auth.username -}}
-    {{- $_ := set .Values.gitea.config.database "PASSWD"    .Values.mariadb.auth.password -}}
-  {{- end -}}
 {{- end -}}
 
 {{- define "gitea.init-additional-mounts" -}}
