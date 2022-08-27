@@ -1,4 +1,3 @@
-{{/* vim: set filetype=mustache: */}}
 {{/*
 Expand the name of the chart.
 */}}
@@ -89,14 +88,6 @@ Selector labels
 {{- define "gitea.selectorLabels" -}}
 app.kubernetes.io/name: {{ include "gitea.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
-{{- end -}}
-
-{{- define "postgresql.dns" -}}
-{{- printf "%s-postgresql.%s.svc.%s:%g" .Release.Name .Release.Namespace .Values.clusterDomain .Values.postgresql.global.postgresql.servicePort -}}
-{{- end -}}
-
-{{- define "memcached.dns" -}}
-{{- printf "%s-memcached.%s.svc.%s:%g" .Release.Name .Release.Namespace .Values.clusterDomain .Values.memcached.service.port | trunc 63 | trimSuffix "-" -}}
 {{- end -}}
 
 {{- define "gitea.default_domain" -}}
@@ -215,7 +206,6 @@ https
 
 {{- define "gitea.inline_configuration.defaults" -}}
   {{- include "gitea.inline_configuration.defaults.server" . -}}
-  {{- include "gitea.inline_configuration.defaults.database" . -}}
 
   {{- if not .Values.gitea.config.repository.ROOT -}}
     {{- $_ := set .Values.gitea.config.repository "ROOT" "/data/git/gitea-repositories" -}}
@@ -225,13 +215,6 @@ https
   {{- end -}}
   {{- if not (hasKey .Values.gitea.config.metrics "ENABLED") -}}
     {{- $_ := set .Values.gitea.config.metrics "ENABLED" .Values.gitea.metrics.enabled -}}
-  {{- end -}}
-  {{- if .Values.memcached.enabled -}}
-    {{- $_ := set .Values.gitea.config.cache "ENABLED" "true" -}}
-    {{- $_ := set .Values.gitea.config.cache "ADAPTER" "memcache" -}}
-    {{- if not (.Values.gitea.config.cache.HOST) -}}
-      {{- $_ := set .Values.gitea.config.cache "HOST" (include "memcached.dns" .) -}}
-    {{- end -}}
   {{- end -}}
 {{- end -}}
 
@@ -278,31 +261,14 @@ https
   {{- end -}}
 {{- end -}}
 
-{{- define "gitea.inline_configuration.defaults.database" -}}
-  {{- if .Values.postgresql.enabled -}}
-    {{- $_ := set .Values.gitea.config.database "DB_TYPE"   "postgres" -}}
-    {{- if not (.Values.gitea.config.database.HOST) -}}
-      {{- $_ := set .Values.gitea.config.database "HOST"      (include "postgresql.dns" .) -}}
-    {{- end -}}
-    {{- $_ := set .Values.gitea.config.database "NAME"      .Values.postgresql.global.postgresql.postgresqlDatabase -}}
-    {{- $_ := set .Values.gitea.config.database "USER"      .Values.postgresql.global.postgresql.postgresqlUsername -}}
-    {{- $_ := set .Values.gitea.config.database "PASSWD"    .Values.postgresql.global.postgresql.postgresqlPassword -}}
-{{- end -}}
-
 {{- define "gitea.init-additional-mounts" -}}
-  {{- /* Honor the deprecated extraVolumeMounts variable when defined */ -}}
   {{- if gt (len .Values.extraInitVolumeMounts) 0 -}}
     {{- toYaml .Values.extraInitVolumeMounts -}}
-  {{- else if gt (len .Values.extraVolumeMounts) 0 -}}
-    {{- toYaml .Values.extraVolumeMounts -}}
   {{- end -}}
 {{- end -}}
 
 {{- define "gitea.container-additional-mounts" -}}
-  {{- /* Honor the deprecated extraVolumeMounts variable when defined */ -}}
   {{- if gt (len .Values.extraContainerVolumeMounts) 0 -}}
     {{- toYaml .Values.extraContainerVolumeMounts -}}
-  {{- else if gt (len .Values.extraVolumeMounts) 0 -}}
-    {{- toYaml .Values.extraVolumeMounts -}}
   {{- end -}}
 {{- end -}}
