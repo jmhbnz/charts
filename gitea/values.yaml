@@ -124,7 +124,7 @@ gitea:
     existingSecret:
     username: jmhbnz
     password: placeholder
-    email: "placeholder@jamma.dev"
+    email: "gitea@jamma.life"
 
   metrics:
     enabled: false
