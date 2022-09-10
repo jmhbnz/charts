@@ -140,6 +140,9 @@ gitea:
       ENABLED: false
     database:
       DB_TYPE: sqlite3
+    service:
+      DISABLE_REGISTRATION: true
+
 
   additionalConfigSources: []
 
