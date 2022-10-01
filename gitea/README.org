@@ -16,7 +16,7 @@ sudo kubectl create namespace jamma-gitea
 mkdir --parent "/home/${USER}/Services/gitea"
 
 # Clone charts repository
-cd "/home/${USER}/Services/gitea" && git clone https://github.com/jmhbnz/charts.git
+cd "/home/${USER}/Services/gitea" && git clone https://gitea.jamma.life/jmhbnz/charts.git
 
 # Ensure the repository is up to date
 cd charts/gitea && git pull

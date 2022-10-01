@@ -10,5 +10,5 @@ I created this helm chart for self-hosting grocy in a container on ~k3s~. Comple
 #+NAME: Deploy grocy via helm
 #+begin_src tmate
 # Clone charts repository
-git clone https://github.com/jmhbnz/charts.git
+git clone https://gitea.jamma.life/jmhbnz/charts.git
 #+end_src

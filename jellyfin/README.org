@@ -16,7 +16,7 @@ sudo kubectl create namespace jamma-jellyfin
 mkdir --parent "/home/${USER}/Services/jellyfin"
 
 # Clone charts repository
-cd "/home/${USER}/Services/jellyfin" && git clone https://github.com/jmhbnz/charts.git
+cd "/home/${USER}/Services/jellyfin" && git clone https://gitea.jamma.life/jmhbnz/charts.git
 
 # Install the chart
 helm upgrade --install -n jamma-jellyfin jamma-jellyfin charts/jellyfin \
