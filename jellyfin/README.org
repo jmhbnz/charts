@@ -18,8 +18,11 @@ mkdir --parent "/home/${USER}/Services/jellyfin"
 # Clone charts repository
 cd "/home/${USER}/Services/jellyfin" && git clone https://gitea.jamma.life/jmhbnz/charts.git
 
+# Ensure the repository is up to date
+cd charts/jellyfin && git pull
+
 # Install the chart
-helm upgrade --install -n jamma-jellyfin jamma-jellyfin charts/jellyfin \
+helm upgrade --install -n jamma-jellyfin jamma-jellyfin . \
     --set "ingress.hosts[0]=jellyfin.jamma.dev" \
     --set "ingress.tls[0].hosts[0]=jellyfin.jamma.dev" \
     --set "ingress.tls[0].secretName=tls-jamma-jellyfin"
