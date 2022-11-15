@@ -1,0 +1,63 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: {{ .Release.Name }}
+  labels:
+    release: {{ .Release.Name }}
+spec:
+  serviceName: {{ .Release.Name }}
+  volumeClaimTemplates:
+    - metadata:
+        name: data
+      spec:
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: {{ .Values.storage }}
+  replicas: {{ .Values.replicas }}
+  selector:
+    matchLabels:
+      release: {{ .Release.Name }}
+  template:
+    metadata:
+      annotations:
+        checksum/config: {{ include (print $.Template.BasePath "/cm.yml") . | sha256sum }}
+      labels:
+        release: {{ .Release.Name }}
+    spec:
+      volumes:
+      - name: config
+        configMap:
+          name: {{ .Release.Name }}
+      containers:
+        - name: main
+          image: {{ .Values.image }}
+          imagePullPolicy: Always
+          ports:
+            - name: http
+              containerPort: 80
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+          volumeMounts:
+            - name: data
+              mountPath: /var/www/html
+            - name: config
+              mountPath: /usr/local/etc/php/conf.d/uploads.ini
+              subPath: uploads.ini
+          env:
+            - name: WORDPRESS_DB_HOST
+              value: {{ required ".Values.WORDPRESS_DB_HOST is required" .Values.WORDPRESS_DB_HOST }}
+            - name: WORDPRESS_DB_USER
+              value: {{ required ".Values.WORDPRESS_DB_USER is required" .Values.WORDPRESS_DB_USER }}
+            - name: WORDPRESS_DB_PASSWORD
+              value: {{ required ".Values.WORDPRESS_DB_PASSWORD is required" .Values.WORDPRESS_DB_PASSWORD }}
+            - name: WORDPRESS_DB_NAME
+              value: {{ required ".Values.WORDPRESS_DB_NAME is required" .Values.WORDPRESS_DB_NAME }}

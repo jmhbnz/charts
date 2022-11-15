@@ -1,0 +1,3 @@
+See:
+- https://{{ .Values.host }}
+- https://{{ .Values.host }}/wp-admin

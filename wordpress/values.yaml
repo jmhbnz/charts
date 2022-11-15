@@ -1,0 +1,12 @@
+# Required
+host:
+WORDPRESS_DB_HOST:
+WORDPRESS_DB_USER:
+WORDPRESS_DB_PASSWORD:
+WORDPRESS_DB_NAME:
+
+# Optional
+image: wordpress:6.1
+storage: 10Gi
+proxyBodySize: 100m
+clusterIssuer: letsencrypt
