@@ -29,6 +29,7 @@ securityContext:
 postgresql:
   image:
     registry: quay.io
+    tag: 13
   auth:
     username: kemal
     password: kemal
