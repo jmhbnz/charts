@@ -3,7 +3,7 @@
 #+EMAIL: mail@jamesblair.net
 #+DATE: <2023-01-11 Wed 16:30>
 
-[[https://github.com/iv-org/invidious][Invidious] is an open source alternative front-end to YouTube.
+[[https://github.com/iv-org/invidious][Invidious]] is an open source alternative front-end to YouTube.
 
 *Key features*
 
