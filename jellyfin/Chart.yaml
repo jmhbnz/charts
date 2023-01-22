@@ -3,4 +3,4 @@ name: jellyfin
 description: A helm chart for deploying the jellyfin media server on kubernetes.
 type: application
 version: 0.1.6
-appVersion: "10.8.8-amd64"
+appVersion: "10.8.9-amd64"
