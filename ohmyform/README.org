@@ -1,0 +1,31 @@
+#+TITLE: Ohmyform survey forms
+#+AUTHOR: James Blair
+#+EMAIL: mail@jamesblair.net
+#+DATE: <2023-06-29 Thu 16:00>
+
+[[https://github.com/ohmyform/ohmyform][Ohmyform]] is an open source alternative to TypeForm that can create stunning mobile-ready forms, surveys and questionnaires.
+
+I created this simplified helm chart for self-hosting ohmyform in a container on ~k3s~. Complete the steps below to deploy this chart.
+
+#+NAME: Deploy ohmyform via helm
+#+begin_src tmate
+# Ensure ohmyform namespace exists
+sudo kubectl create namespace jamma-ohmyform
+
+# Create directories if they don't already exist
+mkdir --parent "/home/${USER}/Services/ohmyform"
+
+# Clone charts repository
+cd "/home/${USER}/Services/ohmyform" && git clone https://ohmyform.jamma.life/jmhbnz/charts.git
+
+# Ensure the repository is up to date
+cd charts/ohmyform && git pull
+
+# Install the chart
+helm upgrade --install -n jamma-ohmyform jamma-ohmyform . \
+    --set "ingress.hosts[0].host=ohmyform.jamma.dev" \
+    --set "ingress.hosts[0].paths[0].path=/" \
+    --set "ingress.hosts[0].paths[0].pathType=Prefix" \
+    --set "ingress.tls[0].hosts[0]=ohmyform.jamma.dev" \
+    --set "ingress.tls[0].secretName=tls-jamma-ohmyform"
+#+end_src
