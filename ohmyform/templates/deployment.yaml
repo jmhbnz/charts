@@ -11,6 +11,9 @@ spec:
   strategy:
     type: Recreate
   template:
+    metadata:
+      labels:
+        app: ohmyform
     spec:
       containers:
         - env:
