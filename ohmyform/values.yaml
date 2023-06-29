@@ -1,0 +1,5 @@
+---
+image:
+  repository: ohmyform/ohmyform
+  pullPolicy: IfNotPresent
+  tag: ""

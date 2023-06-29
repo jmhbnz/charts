@@ -1,0 +1,45 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ohmyform
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ohmyform
+  strategy:
+    type: Recreate
+  template:
+    spec:
+      containers:
+        - env:
+            - name: ADMIN_EMAIL
+              value: admin@local.host
+            - name: ADMIN_PASSWORD
+              value: admin
+            - name: ADMIN_USERNAME
+              value: admin
+            - name: CREATE_ADMIN
+              value: "TRUE"
+            - name: DATABASE_DRIVER
+              value: sqlite
+            - name: DATABASE_URL
+              value: sqlite:///data/data.sqlite
+            - name: LOGIN_NOTE
+              value: Either login with admin:admin or create your own account to test OhMyForm
+            - name: MAILER_URI
+              value: smtp://local.host
+          image: ohmyform/ohmyform
+          name: ohmyform
+          ports:
+            - containerPort: 3000
+          resources: {}
+          volumeMounts:
+            - mountPath: /data
+              name: ohmyform
+      restartPolicy: Always
+      volumes:
+        - name: ohmyform
+          persistentVolumeClaim:
+            claimName: ohmyform
