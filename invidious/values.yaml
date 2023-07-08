@@ -53,3 +53,4 @@ config:
   full_refresh: false
   https_only: false
   domain:
+  hmac_key: placeholder

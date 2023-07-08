@@ -39,5 +39,6 @@ helm upgrade --install -n jamma-invidious jamma-invidious . \
     --set "ingress.hosts[0].paths[0].path=/" \
     --set "ingress.hosts[0].paths[0].pathType=Prefix" \
     --set "ingress.tls[0].hosts[0]=invidious.jamma.dev" \
-    --set "ingress.tls[0].secretName=tls-jamma-invidious"
+    --set "ingress.tls[0].secretName=tls-jamma-invidious" \
+    --set "config.hmac_key=$(openssl rand -hex 20)"
 #+end_src
