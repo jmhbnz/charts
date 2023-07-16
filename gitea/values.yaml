@@ -72,6 +72,14 @@ ingress:
       hosts:
         - gitea.jamma.dev
 
+serviceAccount:
+  create: false
+  name: ""
+  automountServiceAccountToken: false
+  imagePullSecrets: []
+  annotations: {}
+  labels: {}
+
 resources:
   limits:
     cpu: 1
@@ -114,6 +122,13 @@ extraContainerVolumeMounts: []
 extraInitVolumeMounts: []
 
 initPreScript: ""
+
+initContainers:
+  resources:
+    limits: {}
+    requests:
+      cpu: 100m
+      memory: 128Mi
 
 signing:
   enabled: false
