@@ -20,7 +20,7 @@
 I created this simplified helm chart for self-hosting invidious in a container on ~k3s~ based on the excellent upstream [[https://github.com/iv-org/invidious/tree/master/kubernetes][official helm chart]]. Complete the steps below to deploy this chart.
 
 #+NAME: Deploy invidious via helm
-#+begin_src tmate
+#+begin_src tmux
 # Ensure invidious namespace exists
 sudo kubectl create namespace jamma-invidious
 

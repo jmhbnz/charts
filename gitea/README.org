@@ -8,7 +8,7 @@
 I created this simplified helm chart for self-hosting gitea in a container on ~k3s~ based on the excellent upstream [[https://gitea.com/gitea/helm-chart/][official helm chart]]. Complete the steps below to deploy this chart.
 
 #+NAME: Deploy gitea via helm
-#+begin_src tmate
+#+begin_src tmux
 # Ensure gitea namespace exists
 sudo kubectl create namespace jamma-gitea
 

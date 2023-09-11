@@ -8,7 +8,7 @@
 I created this simplified helm chart for self-hosting ohmyform in a container on ~k3s~. Complete the steps below to deploy this chart.
 
 #+NAME: Deploy ohmyform via helm
-#+begin_src tmate
+#+begin_src tmux
 # Ensure ohmyform namespace exists
 sudo kubectl create namespace jamma-ohmyform
 
