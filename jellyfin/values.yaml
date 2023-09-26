@@ -1,9 +1,9 @@
-# Defaults for jellyfin
+---
 replicaCount: 1
 
 image:
   repository: jellyfin/jellyfin
-  tag: 10.8.10-amd64
+  tag: 10.8.11-amd64
   pullPolicy: IfNotPresent
 
 nameOverride: ""
@@ -32,9 +32,9 @@ ingress:
   hosts:
     - jellyfin.jamma.dev
   tls:
-   - secretName: tls-jamma-jellyfin
-     hosts:
-       - jellyfin.jamma.dev
+    - secretName: tls-jamma-jellyfin
+      hosts:
+        - jellyfin.jamma.dev
 
 persistence:
   config:
