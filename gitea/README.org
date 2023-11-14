@@ -5,10 +5,13 @@
 
 [[https://github.com/go-gitea/gitea][Gitea]] is a painless self-hosted Git service.
 
-I created this simplified helm chart for self-hosting gitea in a container on ~k3s~ based on the excellent upstream [[https://gitea.com/gitea/helm-chart/][official helm chart]]. Complete the steps below to deploy this chart.
+I created this simplified helm chart for self-hosting gitea in a container on kubernetes based on the excellent upstream [[https://gitea.com/gitea/helm-chart/][official helm chart]]. Complete the steps below to deploy this chart.
 
 #+NAME: Deploy gitea via helm
 #+begin_src tmux
+# Set deployment environment
+export environment=life
+
 # Ensure gitea namespace exists
 sudo kubectl create namespace jamma-gitea
 
@@ -24,9 +27,9 @@ cd charts/gitea && git pull
 # Install the chart
 helm upgrade --install -n jamma-gitea jamma-gitea . \
     --set "gitea.admin.password=${gitea_admin_password}" \
-    --set "ingress.hosts[0].host=gitea.jamma.dev" \
+    --set "ingress.hosts[0].host=gitea.jamma.${environment}" \
     --set "ingress.hosts[0].paths[0].path=/" \
     --set "ingress.hosts[0].paths[0].pathType=Prefix" \
-    --set "ingress.tls[0].hosts[0]=gitea.jamma.dev" \
+    --set "ingress.tls[0].hosts[0]=gitea.jamma.${environment}" \
     --set "ingress.tls[0].secretName=tls-jamma-gitea"
 #+end_src
