@@ -3,7 +3,7 @@ replicaCount: 1
 
 image:
   repository: jellyfin/jellyfin
-  tag: 10.8.12-amd64
+  tag: 10.8.13-amd64
   pullPolicy: IfNotPresent
 
 nameOverride: ""
