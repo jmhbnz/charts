@@ -1,0 +1,29 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "gitea.fullname" . }}-runner
+  namespace: {{ .Release.Namespace }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: gitea-runner
+  template:
+    metadata:
+      labels:
+        app: gitea-runner
+      annotations:
+        checksum/secret: {{ tpl (toYaml .Values.runner.runnerToken.value) . | sha256sum }}
+    spec:
+      containers:
+        - image: "{{ .Values.image.repository }}/{{ .Values.image.name }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          env:
+            - name: GITEA_INSTANCE_URL
+              value: {{ .Values.runner.instanceURL }}
+            - name: GITEA_RUNNER_REGISTRATION_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "gitea.fullname" . }}-secrets
+                  key: token
