@@ -1,7 +1,7 @@
 ---
 apiVersion: v2
-appVersion: 1.21.9
+appVersion: 1.21.10
 description: Gitea Helm chart for Kubernetes
 name: gitea
 type: application
-version: "1.1.14"
+version: "1.1.15"
