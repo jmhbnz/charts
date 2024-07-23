@@ -3,5 +3,5 @@ apiVersion: v2
 name: jellyfin
 description: A helm chart for deploying the jellyfin media server on kubernetes.
 type: application
-version: 0.2.1
-appVersion: "10.9.4"
+version: 0.2.2
+appVersion: "10.9.8"
