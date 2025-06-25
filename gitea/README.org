@@ -26,10 +26,5 @@ cd charts/gitea && git pull
 
 # Install the chart
 helm upgrade --install -n jamma-gitea jamma-gitea . \
-    --set "gitea.admin.password=${gitea_admin_password}" \
-    --set "ingress.hosts[0].host=gitea.jamma.${environment}" \
-    --set "ingress.hosts[0].paths[0].path=/" \
-    --set "ingress.hosts[0].paths[0].pathType=Prefix" \
-    --set "ingress.tls[0].hosts[0]=gitea.jamma.${environment}" \
-    --set "ingress.tls[0].secretName=tls-jamma-gitea"
+    --set "gitea.admin.password=${gitea_admin_password}"
 #+end_src
