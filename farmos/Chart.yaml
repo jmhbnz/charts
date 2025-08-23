@@ -1,0 +1,7 @@
+---
+apiVersion: v2
+appVersion: 3.4.5
+description: FarmOS Helm chart for Kubernetes
+name: farmos
+type: application
+version: "0.1.0"

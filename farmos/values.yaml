@@ -1,0 +1,6 @@
+---
+replicaCount: 1
+
+image:
+  repository: docker.io/farmos/farmos
+  tag: "3.4.5"
