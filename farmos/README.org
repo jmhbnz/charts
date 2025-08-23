@@ -7,16 +7,16 @@
 
 I created this simplified helm chart for self-hosting farmos in a container on kubernetes. Complete the steps below to deploy this chart.
 
-#+NAME: Deploy gitea via helm
+#+NAME: Deploy farmos via helm
 #+begin_src tmux
-# Ensure gitea namespace exists
+# Ensure farmos namespace exists
 sudo kubectl create namespace jamma-farmos
 
 # Create directories if they don't already exist
 mkdir --parent "/home/${USER}/Services/farmos"
 
 # Clone charts repository
-cd "/home/${USER}/Services/gitea" && git clone https://gitea.jamma.life/jmhbnz/charts.git
+cd "/home/${USER}/Services/farmos" && git clone https://gitea.jamma.life/jmhbnz/charts.git
 
 # Ensure the repository is up to date
 cd charts/farmos && git pull
