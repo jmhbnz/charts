@@ -95,7 +95,7 @@ statefulset:
 
 persistence:
   enabled: true
-  existingClaim:
+  existingClaim: data-jamma-gitea-0
   size: 10Gi
   accessModes:
     - ReadWriteOnce
