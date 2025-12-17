@@ -7,13 +7,14 @@
 
 I created this simplified helm chart for self-hosting gitea in a container on kubernetes based on the excellent upstream [[https://gitea.com/gitea/helm-chart/][official helm chart]]. Complete the steps below to deploy this chart.
 
+#+begin_src tmux
+ls
+#+end_src
+
 #+NAME: Deploy gitea via helm
 #+begin_src tmux
 # Set deployment environment
 export environment=dev
-
-# Ensure gitea namespace exists
-sudo kubectl create namespace jamma-gitea
 
 # Create directories if they don't already exist
 mkdir --parent "/home/${USER}/Services/gitea"
@@ -25,6 +26,8 @@ cd "/home/${USER}/Services/gitea" && git clone https://gitea.jamma.life/jmhbnz/c
 cd charts/gitea && git pull
 
 # Install the chart
-helm upgrade --install -n jamma-gitea jamma-gitea . \
-    --set "gitea.admin.password=${gitea_admin_password}"
+helm upgrade --install jamma-gitea-${environment} . \
+    --namespace jamma-gitea-${environment} \
+    --create-namespace \
+    --set "gitea.admin.password=$(bw get password gitea)"
 #+end_src

@@ -52,6 +52,15 @@ service:
 
 ingress:
   enabled: false
+  hosts:
+    - host: gitea.jamma.dev
+      paths:
+        - path: /
+          pathType: Prefix
+  tls:
+    - secretName: tls-jamma-gitea
+      hosts:
+        - gitea.jamma.dev
 
 serviceAccount:
   create: false
