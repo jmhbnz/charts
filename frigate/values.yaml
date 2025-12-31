@@ -95,9 +95,6 @@ config: |
         - speech
         - bird
         - chicken
-  cameras:
-    jamma-driveway-cam:
-      enabled: false
 
 probes:
   liveness:
