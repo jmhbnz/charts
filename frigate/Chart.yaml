@@ -1,0 +1,7 @@
+---
+apiVersion: v2
+appVersion: "0.17.0-beta1"
+description: Network video recorder with real time object detection
+name: frigate
+type: application
+version: 1.0.0

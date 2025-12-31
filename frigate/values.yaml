@@ -1,0 +1,139 @@
+---
+image:
+  repository: ghcr.io/blakeblackshear/frigate
+  tag:
+  pullPolicy: IfNotPresent
+
+imagePullSecrets: []
+
+env: {}
+  # TZ: UTC
+
+envFromSecrets: []
+  # secrets are required before `helm install`
+  # - frigate-rstp-credentials
+
+gpu:
+  nvidia:
+    enabled: false
+    runtimeClassName:
+
+shmSize: 1Gi
+
+tmpfs:
+  enabled: true
+  sizeLimit: 1Gi
+
+config: |
+  mqtt:
+    # Required: host name
+    host: mqtt.server.com
+    # Optional: port (default: shown below)
+    port: 1883
+    # Optional: topic prefix (default: shown below)
+    # WARNING: must be unique if you are running multiple instances
+    topic_prefix: frigate
+    # Optional: client id (default: shown below)
+    # WARNING: must be unique if you are running multiple instances
+    client_id: frigate
+    # Optional: user
+    user: mqtt_user
+    # Optional: password
+    # NOTE: Environment variables that begin with 'FRIGATE_' may be referenced in {}.
+    #       eg. password: '{FRIGATE_MQTT_PASSWORD}'
+    password: password
+    # Optional: interval in seconds for publishing stats (default: shown below)
+    stats_interval: 60
+
+  detectors:
+    # coral:
+    #   type: edgetpu
+    #   device: usb
+    cpu1:
+      type: cpu
+
+  # cameras:
+  #   # Name of your camera
+  #   front_door:
+  #     ffmpeg:
+  #       inputs:
+  #         - path: rtsp://{FRIGATE_RSTP_USERNAME}:{FRIGATE_RTSP_PASSWORD}@10.0.10.10:554/cam/realmonitor?channel=1&subtype=2
+  #           roles:
+  #             - detect
+  #             - rtmp
+  #     width: 1280
+  #     height: 720
+  #     fps: 5
+
+probes:
+  liveness:
+    enabled: true
+    initialDelaySeconds: 30
+    failureThreshold: 5
+    timeoutSeconds: 10
+  readiness:
+    enabled: true
+    initialDelaySeconds: 30
+    failureThreshold: 5
+    timeoutSeconds: 10
+  startup:
+    enabled: false
+    failureThreshold: 30
+    periodSeconds: 10
+
+service:
+  type: ClusterIP
+  port: 5000
+
+persistence:
+  config:
+    enabled: true
+    accessMode: ReadWriteOnce
+    size: 100Mi
+    skipuninstall: true
+
+    ## Copy configMap config into volume to make writable
+    ## All live changes are lost when pod restarts, but this allows
+    ## an easy way to run migrations and edit config, then scrape
+    ## it from the API or copy out of the pod and update local helm values
+    ephemeralWritableConfigYaml: true
+
+  media:
+    enabled: true
+    accessMode: ReadWriteOnce
+    size: 10Gi
+    skipuninstall: true
+
+resources: {}
+  # limits:
+  #   cpu: 100m
+  #   memory: 128Mi
+  #   gpu.intel.com/i915: 1
+  # requests:
+  #   cpu: 100m
+  #   memory: 128Mi
+  #   gpu.intel.com/i915: 1
+
+# -- Set Frigate Container Security Context
+securityContext: {}
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+  # runAsUser: 1000
+  # privileged: true
+
+# -- Set Pod level Security Context
+# -- the container level securiy context defined above
+# -- will override it for frigate container
+podSecurityContext: {}
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+  # runAsUser: 1000
+  # fsGroup: 1000
+  # privileged: true
+
