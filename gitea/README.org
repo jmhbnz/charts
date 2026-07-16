@@ -7,10 +7,6 @@
 
 I created this simplified helm chart for self-hosting gitea in a container on kubernetes based on the excellent upstream [[https://gitea.com/gitea/helm-chart/][official helm chart]]. Complete the steps below to deploy this chart.
 
-#+begin_src tmux
-ls
-#+end_src
-
 #+NAME: Deploy gitea via helm
 #+begin_src tmux
 # Set deployment environment
