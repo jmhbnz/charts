@@ -9,8 +9,8 @@ I created this helm chart for self-hosting jellyfin in a container on ~k3s~. Com
 
 #+NAME: Deploy jellyfin via helm
 #+begin_src tmux
-# Ensure jellyfin namespace exists
-sudo kubectl create namespace jamma-jellyfin
+# Set deployment environment
+export environment=dev
 
 # Create directories if they don't already exist
 mkdir --parent "/home/${USER}/Services/jellyfin"
@@ -22,5 +22,5 @@ cd "/home/${USER}/Services/jellyfin" && git clone https://gitea.jamma.life/jmhbn
 cd charts/jellyfin && git pull
 
 # Install the chart
-helm upgrade --install -n jamma-jellyfin jamma-jellyfin .
+helm upgrade --install --create-namespace --namespace jamma-jellyfin-${environment} jamma-jellyfin-${environment} .
 #+end_src
