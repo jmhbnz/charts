@@ -2,8 +2,8 @@
 replicaCount: 1
 
 image:
-  repository: jellyfin/jellyfin
-  tag: 12.0-rc2
+  repository: ghcr.io/jellyfin/jellyfin
+  tag: 12.0-rc3
   pullPolicy: IfNotPresent
 
 nameOverride: ""
@@ -19,10 +19,6 @@ ingress:
 persistence:
   config:
     enabled: true
-    ## If you want to reuse an existing claim, you can pass the name of the PVC using
-    ## the existingClaim variable
-    # existingClaim: your-claim
-    # subPath: some-subpath
     accessMode: ReadWriteOnce
     size: 1Gi
   media:
@@ -30,12 +26,6 @@ persistence:
     accessMode: ReadWriteOnce
     size: 10Gi
   extraExistingClaimMounts: []
-    # - name: external-mount
-    #   mountPath: /srv/external-mount
-    ## A manually managed Persistent Volume and Claim
-    ## If defined, PVC must be created manually before volume will be bound
-    #   existingClaim:
-    #   readOnly: true
 
 resources:
   limits:
