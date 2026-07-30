@@ -339,19 +339,19 @@ resources: {}
   #   gpu.intel.com/i915: 1
 
 # -- Set Frigate Container Security Context
-securityContext: {}
+securityContext:
   # capabilities:
   #   drop:
   #   - ALL
   # readOnlyRootFilesystem: true
   # runAsNonRoot: true
   # runAsUser: 1000
-  # privileged: true
+  privileged: true
 
 # -- Set Pod level Security Context
 # -- the container level securiy context defined above
 # -- will override it for frigate container
-podSecurityContext: {}
+podSecurityContext:
   # capabilities:
   #   drop:
   #   - ALL
@@ -359,5 +359,20 @@ podSecurityContext: {}
   # runAsNonRoot: true
   # runAsUser: 1000
   # fsGroup: 1000
-  # privileged: true
+  privileged: true
 
+extraVolumes:
+  - name: dri
+    hostPath:
+      path: /dev/dri
+      type: Directory
+  - name: kfd
+    hostPath:
+      path: /dev/kfd
+      type: CharDevice
+
+extraVolumeMounts:
+  - name: dri
+    mountPath: /dev/dri
+  - name: kfd
+    mountPath: /dev/kfd
