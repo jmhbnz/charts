@@ -4,4 +4,4 @@ appVersion: "0.18.0-beta2-rocm"
 description: Network video recorder with real time object detection
 name: frigate
 type: application
-version: 1.0.9
+version: 1.0.10
