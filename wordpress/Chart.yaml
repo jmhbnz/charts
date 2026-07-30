@@ -3,4 +3,6 @@ name: wordpress
 description: A helm chart for deploying the wordpress cms on kubernetes.
 type: application
 version: 0.1.0
-appVersion: "6.1"
+appVersion: "php8.5-apache"
+annotations:
+  mariadbVersion: "11.8"
