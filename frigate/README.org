@@ -24,6 +24,7 @@ cd charts/frigate && git pull
 # Install the chart
 helm upgrade --install jamma-frigate . \
     --namespace jamma-frigate-${environment} \
-    --set env.FRIGATE_RTSP_PASSWORD 'replaceme' \
+    --set env.FRIGATE_RTSP_PASSWORD=\'$(bw get password dahua)\' \
+    --set env.PLUS_API_KEY=$(bw get item frigate | jq '.fields[1].value') \
     --create-namespace
 #+end_src
