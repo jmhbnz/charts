@@ -1,0 +1,331 @@
+tls:
+  enabled: false
+mqtt:
+  enabled: false
+model:
+  path: plus://19e725aa90b9063fdce57fdcd7132ee5
+detectors:
+  rocm:
+    type: onnx
+    device: rocm
+detect:
+  enabled: true
+semantic_search:
+  enabled: true
+  model_size: small
+face_recognition:
+  enabled: true
+  model_size: small
+lpr:
+  enabled: true
+  device: CPU
+classification:
+  bird:
+    enabled: false
+notifications:
+  enabled: false
+  email: frigate@jamma.life
+record:
+  enabled: true
+  alerts:
+    retain:
+      days: 14
+  detections:
+    retain:
+      days: 7
+  continuous:
+    days: 3
+  motion:
+    days: 3
+objects:
+  track:
+    - person
+    - car
+    - bicycle
+    - motorcycle
+    - dog
+    - cat
+    - bird
+    - chicken
+    - licence_plate
+    - license_plate
+  filters:
+    license_plate:
+      min_score: 0.5
+review:
+  alerts:
+    labels:
+      - car
+      - person
+      - motorcycle
+      - licence_plate
+  detections:
+    labels:
+      - cat
+      - dog
+      - bicycle
+      - speech
+      - bird
+      - chicken
+
+camera_groups:
+  jamma-farm:
+    cameras:
+      - jamma-driveway-cam
+    icon: LuCat
+    order: 0
+
+  jamma-vehicle-watch:
+    order: 1
+    icon: LuCar
+    cameras:
+      - jamma-airbnb-road-cam
+      - jamma-driveway-cam
+      - jamma-airbnb-driveway-cam
+
+cameras:
+  jamma-road-lpr-cam:
+    enabled: true
+    webui_url: http://192.168.8.124
+    ffmpeg:
+      output_args:
+        record: preset-record-generic-audio-aac
+      inputs:
+        - path: rtsp://admin:{FRIGATE_RTSP_PASSWORD}@192.168.8.124:554/live
+          roles:
+            - record
+            - detect
+            - audio
+    live:
+      quality: 31
+      streams:
+        jamma-road-lpr-cam: jamma-road-lpr-cam-live
+    motion:
+      threshold: 40
+      contour_area: 20
+      improve_contrast: true
+    notifications:
+      enabled: true
+
+    objects:
+      track:
+        - person
+        - car
+        - bicycle
+        - motorcycle
+        - dog
+        - cat
+        - bird
+        - license_plate
+      filters:
+        license_plate:
+          min_score: 0.3
+    detect:
+      fps: 10
+    snapshots:
+      enabled: true
+      quality: 100
+    review:
+      alerts:
+        labels:
+          - car
+          - person
+          - motorcycle
+          - licence_plate
+          - license_plate
+        required_zones:
+          - road
+      detections:
+        labels:
+          - cat
+          - dog
+          - bicycle
+          - speech
+          - bird
+          - chicken
+          - license_plate
+          - licence_plate
+          - motorcycle
+          - person
+        required_zones:
+          - road
+    audio:
+      min_volume: 350
+    lpr:
+      min_area: 250
+      enhancement: 1
+    zones:
+      road:
+        coordinates: 0.308,0.36,0.616,0.363,0.62,0.822,0.308,0.816
+        enabled: true
+        inertia: 1
+        loitering_time: 0
+        friendly_name: Road
+  jamma-driveway-cam:
+    enabled: true
+    webui_url: http://192.168.100.168
+    ffmpeg:
+      output_args:
+        record: preset-record-generic-audio-aac
+      inputs:
+        - path: rtsp://admin:{FRIGATE_RTSP_PASSWORD}@192.168.100.168:554/live
+          roles:
+            - record
+            - detect
+    live:
+      quality: 31
+      streams:
+        jamma-driveway-cam: jamma-driveway-cam-live
+    motion:
+      threshold: 40
+      contour_area: 20
+      improve_contrast: true
+      mask:
+        motion_mask_1:
+          friendly_name: Motion Mask 1
+          enabled: true
+          coordinates:
+            0.551,0.301,0.493,0.288,0.333,0.295,0.332,0.357,0.461,0.423,0.557,0.428,0.614,0.444,0.666,0.448,0.72,0.441,0.717,0.363,0.711,0.312,0.692,0.242,0.668,0.232,0.61,0.212,0.573,0.239
+    notifications:
+      enabled: true
+    zones:
+      Driveway:
+        coordinates:
+          0.049,0.268,0.076,0.285,0.035,0.342,0.069,0.352,0.003,0.401,0.002,0.918,0.03,0.991,0.996,0.995,0.993,0.695,0.743,0.659,0.75,0.565,0.999,0.572,0.997,0.476,0.932,0.437,0.638,0.436,0.456,0.423,0.335,0.361,0.27,0.322,0.155,0.319,0.08,0.336,0.091,0.268,0.072,0.256
+        loitering_time: 0
+      Lawn:
+        coordinates:
+          0.149,0.317,0.198,0.279,0.187,0.253,0.277,0.218,0.465,0.203,0.691,0.217,0.788,0.253,0.789,0.275,0.58,0.258,0.548,0.297,0.493,0.286,0.285,0.294,0.263,0.314
+        loitering_time: 0
+      Deck:
+        coordinates:
+          0.813,0.26,0.657,0.263,0.695,0.321,0.823,0.345,0.919,0.427,0.983,0.463,0.995,0.375
+        loitering_time: 0
+    review:
+      alerts:
+        required_zones:
+          - Driveway
+          - Lawn
+          - Deck
+
+
+        labels:
+          - car
+          - person
+          - motorcycle
+          - licence_plate
+          - license_plate
+      detections:
+        labels:
+          - cat
+          - dog
+          - bicycle
+          - speech
+          - bird
+          - chicken
+          - licence_plate
+          - license_plate
+    lpr:
+      min_area: 500
+      enhancement: 1
+  jamma-airbnb-road-cam:
+    enabled: true
+    webui_url: http://192.168.8.200
+    ffmpeg:
+      output_args:
+        record: preset-record-generic-audio-aac
+      inputs:
+        - path: rtsp://admin:{FRIGATE_RTSP_PASSWORD}@192.168.8.200:554/live
+          roles:
+            - record
+            - detect
+    live:
+      quality: 31
+      streams:
+        jamma-airbnb-road-cam: jamma-airbnb-road-cam-live
+    motion:
+      threshold: 40
+      contour_area: 20
+      improve_contrast: true
+      mask:
+        motion_mask_1:
+          friendly_name: Motion Mask 1
+          enabled: true
+          coordinates:
+            0,1,0.226,0.703,0.176,0.665,0.058,0.475,0,0.439,0,0.662,0,0.76,0,0.845
+        motion_mask_2:
+          friendly_name: Motion Mask 2
+          enabled: true
+          coordinates:
+            0.607,0.756,0.599,0.504,0.533,0,0.763,0,1,0,1,0.402,1,1,0.844,1,0.696,1,0.623,1
+    notifications:
+      enabled: true
+
+
+  jamma-airbnb-driveway-cam:
+    enabled: true
+    webui_url: http://192.168.1.206
+    ffmpeg:
+      output_args:
+        record: preset-record-generic-audio-aac
+      inputs:
+        - path: rtsp://admin:{FRIGATE_RTSP_PASSWORD}@192.168.1.206:554/live
+          roles:
+            - record
+            - detect
+    motion:
+      threshold: 40
+      contour_area: 20
+      improve_contrast: true
+      mask:
+        motion_mask_1:
+          friendly_name: Motion Mask 1
+          enabled: true
+          coordinates:
+            0.004,0.687,0.003,0.02,0.758,0.014,0.741,0.164,0.49,0.14,0.294,0.492
+    notifications:
+      enabled: true
+    zones:
+      Lawn:
+        coordinates: 0.31,0.536,0.562,0.754,0.558,0.996,0.001,0.996,0.002,0.726
+        loitering_time: 0
+      Parking:
+        coordinates:
+          0.32,0.532,0.52,0.181,0.743,0.181,0.772,0.212,0.986,0.576,0.994,0.862,0.566,0.719
+        loitering_time: 0
+      Verge:
+        coordinates: 0.804,0.225,0.918,0.244,0.999,0.341,0.995,0.531
+        loitering_time: 0
+    review:
+      alerts:
+        required_zones:
+          - Lawn
+          - Parking
+          - Verge
+    live:
+      quality: 31
+      streams:
+        jamma-airbnb-driveway-cam: jamma-airbnb-driveway-cam-live
+
+
+go2rtc:
+  streams:
+    jamma-road-lpr-cam-live:
+      - rtsp://admin:{FRIGATE_RTSP_PASSWORD}@192.168.8.124:554/live
+    jamma-driveway-cam-live:
+      - rtsp://admin:{FRIGATE_RTSP_PASSWORD}@192.168.100.168:554/live
+    jamma-airbnb-road-cam-live:
+      - rtsp://admin:{FRIGATE_RTSP_PASSWORD}@192.168.8.200:554/live
+    jamma-airbnb-driveway-cam-live:
+      - rtsp://admin:{FRIGATE_RTSP_PASSWORD}@192.168.1.206:554/live
+
+version: 0.18-0
+auth:
+  roles:
+    emma:
+      - jamma-road-lpr-cam
+      - jamma-driveway-cam
+      - jamma-airbnb-road-cam
+      - jamma-airbnb-driveway-cam
+    mark:
+      - jamma-road-lpr-cam

@@ -11,4 +11,4 @@ metadata:
     app.kubernetes.io/managed-by: {{ .Release.Service }}
 data:
   config.yml: |
-{{ .Values.config | indent 4 }}
+{{ .Files.Get "config/config.yaml" | indent 4 }}

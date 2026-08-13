@@ -24,5 +24,6 @@ cd charts/frigate && git pull
 # Install the chart
 helm upgrade --install jamma-frigate . \
     --namespace jamma-frigate-${environment} \
+    --set env.FRIGATE_RTSP_PASSWORD 'replaceme' \
     --create-namespace
 #+end_src
