@@ -34,9 +34,9 @@ record:
     retain:
       days: 7
   continuous:
-    days: 3
+    days: 5
   motion:
-    days: 3
+    days: 7
 objects:
   track:
     - person
@@ -104,6 +104,11 @@ cameras:
       threshold: 40
       contour_area: 20
       improve_contrast: true
+      mask:
+        motion_mask_1:
+          friendly_name: Motion Mask 1
+          enabled: true
+          coordinates: 0.271,1,0.661,1,0.635,0.723,0.267,0.642
     notifications:
       enabled: true
 
@@ -329,3 +334,6 @@ auth:
       - jamma-airbnb-driveway-cam
     mark:
       - jamma-road-lpr-cam
+environment_vars:
+  PLUS_API_KEY:
+    replaceme
