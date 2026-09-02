@@ -1,0 +1,6 @@
+---
+tunnel:
+  name: tunnel-name
+  hostname: external.example.com
+  service: internal.example.com
+  port: 3000

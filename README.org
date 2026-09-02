@@ -3,8 +3,6 @@
 #+EMAIL: mail@jamesblair.net
 #+DATE: <2022-05-01 Sun 10:15>
 
-This repository contains all the helm charts I store and maintain for my personal infrastructure.
+This repository contains helm charts I maintain personally.
 
-A github actions workflow is in place ~on: push~ to ensure charts are linted.
-
-In future I will extend this repository to also validate the deployment of charts against a short lived minikube cluster and publish charts.
+Typically these are simplified variants of upstream charts with drastically reduced templating in order to reduce cognitive burden and better align with my own needs.

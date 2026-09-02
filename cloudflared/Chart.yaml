@@ -1,0 +1,7 @@
+---
+apiVersion: v2
+appVersion: 2026.8.3
+description: Cloudflared helm chart for kubernetes
+name: cloudflared
+type: application
+version: 0.1.0
