@@ -1,7 +1,7 @@
 ---
 apiVersion: v2
-appVersion: "0.18.0-rc1-rocm"
+appVersion: "0.18.0-rocm"
 description: Network video recorder with real time object detection
 name: frigate
 type: application
-version: 1.1.1
+version: 1.1.2
