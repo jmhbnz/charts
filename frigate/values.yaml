@@ -10,6 +10,7 @@ env:
   HSA_OVERRIDE_GFX_VERSION: "12.0.0"
   FRIGATE_RTSP_PASSWORD: "replaceme"
   PLUS_API_KEY: "replaceme"
+  TZ: "Pacific/Auckland"
 
 envFromSecrets: []
 
