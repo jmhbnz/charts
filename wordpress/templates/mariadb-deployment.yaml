@@ -20,7 +20,7 @@ spec:
         - name: mariadb
 
           image: {{ .Values.databaseImage }}:{{ index .Chart.Annotations "mariadbVersion" }}
-
+          imagePullPolicy: Always
           ports:
             - containerPort: 3306
 

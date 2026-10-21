@@ -2,7 +2,7 @@ apiVersion: v2
 name: wordpress
 description: A helm chart for deploying the wordpress cms on kubernetes.
 type: application
-version: 0.1.0
+version: 0.1.1
 appVersion: "php8.5-apache"
 annotations:
   mariadbVersion: "11.8"
